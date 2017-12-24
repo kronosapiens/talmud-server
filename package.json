@@ -1,0 +1,27 @@
+{
+  "name": "talmud",
+  "version": "1.0.0",
+  "description": "Computational governance on the blockchain",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kronosapiens/talmud.git"
+  },
+  "keywords": [
+    "blockchain",
+    "governance",
+    "mathematics",
+    "economics",
+    "voting",
+    "identity"
+  ],
+  "author": "Daniel Kronovet",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/kronosapiens/talmud/issues"
+  },
+  "homepage": "https://github.com/kronosapiens/talmud#readme"
+}
