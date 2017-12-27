@@ -10,16 +10,23 @@ function toIdentitySet(preferenceArray) { // [{a_id, b_id, winner}]
 }
 
 function toMatrix(preferenceArray) { // [{a_id, b_id, winner}]
-  const identitySet = toIdentitySet(preferenceArray)
-  const identityMap = new Map(Array.from(identitySet).sort().map((id, ix) => [id, ix]))
-  const n = identityMap.size
+  const idSet = toIdentitySet(preferenceArray)
+  const idMap = new Map(Array.from(idSet).sort().map((id, ix) => [id, ix]))
+  const n = idMap.size
   const matrix = linAlg.Matrix.zero(n, n)
 
+  // Calculate the off-diagonals
   preferenceArray.forEach(p => {
     let [winner, loser] = (p.winner == 0) ? [p.a_id, p.b_id] : [p.b_id, p.a_id]
-    let [winner_ix, loser_ix] = [identityMap.get(winner), identityMap.get(loser)]
+    let [winner_ix, loser_ix] = [idMap.get(winner), idMap.get(loser)]
     matrix.data[loser_ix][winner_ix] += 1
   })
+
+  // Add the diagonals (sums of columns)
+  matrix.trans().data.map((col, ix) =>
+    matrix.data[ix][ix] = col.reduce((sum, val) => sum + val, 0)
+  )
+
   return matrix
 }
 

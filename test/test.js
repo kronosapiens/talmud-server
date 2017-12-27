@@ -5,7 +5,7 @@ describe('graphs.js', function() {
   const linAlg = require('linear-algebra')()
 
   describe('#toIdentitySet()', function() {
-    it('should convert an array of preferences to a set of unique identities', function() {
+    it('should convert an array of preferences to a set of identities', function() {
       const preferences = [
         {'a_id': 0, 'b_id': 1},
         {'a_id': 1, 'b_id': 3},
@@ -22,7 +22,7 @@ describe('graphs.js', function() {
         {'a_id': 0, 'b_id': 3, 'winner': 1},
       ]
       const matrix = graph.toMatrix(preferences)
-      assert.deepEqual(matrix, new linAlg.Matrix([[0, 0, 1], [1, 0, 0], [0, 0, 0]]))
+      assert.deepEqual(matrix, new linAlg.Matrix([[1, 0, 1], [1, 0, 0], [0, 0, 1]]))
     })
   })
 
