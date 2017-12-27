@@ -26,4 +26,17 @@ describe('graphs.js', function() {
     })
   })
 
+  describe('#powerMethod()', function() {
+    it('should find the principal eigenvector of the matrix', function() {
+      const matrix = new linAlg.Matrix([[1, 0], [1, 0]])
+      const eigenvector = graph.powerMethod(matrix)
+      assert.deepEqual(eigenvector, new linAlg.Matrix([1, 0]))
+    })
+    it('should find the principal eigenvector of the matrix', function() {
+      const matrix = new linAlg.Matrix([[1, 1], [1, 1]])
+      const eigenvector = graph.powerMethod(matrix)
+      assert.deepEqual(eigenvector, new linAlg.Matrix([.5, .5]))
+    })
+  })
+
 })
