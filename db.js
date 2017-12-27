@@ -13,19 +13,16 @@ function saveIdentityP(name) {
   return db('identities')
     .insert({'name': name})
     .returning('id')
+    .catch(errorLogger)
     .then(function(id) {
       console.log('Identity id:', id)
     })
-    .catch(errorLogger)
 }
 
 function getIdentitiesP() {
   return db
     .select('*')
     .from('identities')
-    .then(function(rows){
-      console.log(rows)
-    })
     .catch(errorLogger)
 }
 
@@ -35,19 +32,16 @@ function savePreferenceP(winner_id, loser_id) {
   return db('preferences')
     .insert({'a_id': a_id, 'b_id': b_id, 'winner': winner})
     .returning('id')
+    .catch(errorLogger)
     .then(function(id) {
       console.log('Preference id:', id)
     })
-    .catch(errorLogger)
 }
 
 function getPreferencesP() {
   return db
     .select('a_id', 'b_id', 'winner')
     .from('preferences')
-    .then(function(rows) {
-      console.log(rows)
-    })
     .catch(errorLogger)
 }
 
