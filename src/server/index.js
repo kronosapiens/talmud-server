@@ -7,7 +7,7 @@ const db = require('./db')
 const app = express()
 app.use(helmet())
 app.use(express.static('src/viz'))
-
+app.use(express.static('static'))
 
 // Define endpoints
 app.get('/', (req, res) => res.send('Hello World!'))

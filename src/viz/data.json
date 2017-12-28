@@ -3,14 +3,14 @@
     {"name": "Human"},
     {"name": "Man"},
     {"name": "Woman"},
-    {"name": "Straight"},
-    {"name": "Gay"}
+    {"name": "Progressive"},
+    {"name": "Conservative"}
   ],
-  "links": [
-    {"source": 1, "target": 0, "value": 1},
-    {"source": 1, "target": 2, "value": 1},
-    {"source": 2, "target": 0, "value": 2},
-    {"source": 3, "target": 0, "value": 3},
-    {"source": 4, "target": 2, "value": 4}
+  "edges": [
+    {"source": 1, "target": 0, "weight": 1},
+    {"source": 1, "target": 2, "weight": 1},
+    {"source": 2, "target": 0, "weight": 2},
+    {"source": 3, "target": 0, "weight": 3},
+    {"source": 4, "target": 2, "weight": 4}
   ]
 }

@@ -14,7 +14,7 @@
     {
       "name": "link-data",
       "url": "data.json",
-      "format": {"type": "json", "property": "links"}
+      "format": {"type": "json", "property": "edges"}
     }
   ],
 

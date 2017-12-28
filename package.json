@@ -4,7 +4,9 @@
   "description": "Computational Governance",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node src/server/index.js",
+    "build": "npx webpack"
   },
   "repository": {
     "type": "git",
@@ -31,6 +33,7 @@
     "helmet": "^3.9.0",
     "knex": "^0.14.2",
     "linear-algebra": "^3.1.4",
-    "pg": "^7.4.0"
-  }
+    "pg": "^7.4.0",
+    "vue": "^2.5.13"
+  },
 }

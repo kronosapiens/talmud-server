@@ -5,17 +5,17 @@ function drawGraph(dataset) {
 
   var colors = d3.scale.category10();
 
-  var svg = d3.select("body").append("svg").attr({"width":w,"height":h});
+  var svg = d3.select("svg").attr({"width":w,"height":h});
 
   var force = d3.layout.force()
-      .nodes(dataset.nodes)
-      .links(dataset.edges)
-      .size([w,h])
-      .linkDistance([linkDistance])
-      .charge([-500])
-      .theta(0.1)
-      .gravity(0.05)
-      .start();
+    .nodes(dataset.nodes)
+    .links(dataset.edges)
+    .size([w,h])
+    .linkDistance([linkDistance])
+    .charge([-500])
+    .theta(0.1)
+    .gravity(0.05)
+    .start();
 
   var edges = svg.selectAll("line")
     .data(dataset.edges)
@@ -24,6 +24,7 @@ function drawGraph(dataset) {
     .attr("id",function(d,i) {return 'edge'+i})
     .attr('marker-end','url(#arrowhead)')
     .style("stroke","#ccc")
+    .style("stroke-width", function(d) {return d.weight})
     .style("pointer-events", "none");
   
   var nodes = svg.selectAll("circle")
@@ -73,7 +74,7 @@ function drawGraph(dataset) {
   edgelabels.append('textPath')
       .attr('xlink:href',function(d,i) {return '#edgepath'+i})
       .style("pointer-events", "none")
-      .text(function(d,i){return 'label '+i});
+      .text(function(d,i){return 'weight: '+d.weight});
 
 
   svg.append('defs').append('marker')
