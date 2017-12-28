@@ -6,6 +6,8 @@ const db = require('./db')
 // Instantiate application
 const app = express()
 app.use(helmet())
+app.use(express.static('src/viz'))
+
 
 // Define endpoints
 app.get('/', (req, res) => res.send('Hello World!'))

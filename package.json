@@ -26,6 +26,7 @@
   "homepage": "https://github.com/kronosapiens/talmud#readme",
   "dependencies": {
     "bcrypt": "^1.0.3",
+    "d3": "^4.12.2",
     "express": "^4.16.2",
     "helmet": "^3.9.0",
     "knex": "^0.14.2",
