@@ -33,9 +33,6 @@ function savePreferenceP(winner_id, loser_id) {
     .insert({'a_id': a_id, 'b_id': b_id, 'winner': winner})
     .returning('id')
     .catch(errorLogger)
-    .then(function(id) {
-      console.log('Preference id:', id)
-    })
 }
 
 function getPreferencesP() {
@@ -45,7 +42,23 @@ function getPreferencesP() {
     .catch(errorLogger)
 }
 
+function seedIdentities() {
+  saveIdentityP('Human')
+  saveIdentityP('Man')
+  saveIdentityP('Woman')
+  saveIdentityP('Progressive')
+  saveIdentityP('Conservative')
+  saveIdentityP('Lover')
+  saveIdentityP('Fighter')
+  saveIdentityP('Jew')
+  saveIdentityP('Christian')
+  saveIdentityP('Buddhist')
+  saveIdentityP('Muslim')
+  saveIdentityP('Hindu')
+}
+
 exports.saveIdentityP = saveIdentityP
 exports.getIdentitiesP = getIdentitiesP
 exports.savePreferenceP = savePreferenceP
 exports.getPreferencesP = getPreferencesP
+exports.seedIdentities = seedIdentities
