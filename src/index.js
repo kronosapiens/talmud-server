@@ -7,7 +7,7 @@ const db = require('./db')
 const app = express()
 app.use(helmet())
 app.use(express.static('src/viz'))
-app.use(express.static('static'))
+app.use(express.static('assets'))
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")

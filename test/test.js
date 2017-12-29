@@ -1,7 +1,7 @@
 const assert = require('assert')
 
 describe('graphs.js', function() {
-  const graph = require('../src/server/graph')
+  const graph = require('../src/graph')
   const linAlg = require('linear-algebra')()
 
   describe('#toIdentitySet()', function() {

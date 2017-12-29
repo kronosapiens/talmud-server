@@ -1,4 +1,4 @@
-# talmud
+# talmud-server
 Computational Governance
 
 ## Further Readings

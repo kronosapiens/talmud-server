@@ -1,16 +1,15 @@
 {
-  "name": "talmud",
+  "name": "talmud-server",
   "version": "1.0.0",
   "description": "Computational Governance",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "start": "node src/server/index.js",
-    "build": "npx webpack"
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kronosapiens/talmud.git"
+    "url": "git+https://github.com/kronosapiens/talmud-server.git"
   },
   "keywords": [
     "blockchain",
@@ -23,17 +22,14 @@
   "author": "Daniel Kronovet",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/kronosapiens/talmud/issues"
+    "url": "https://github.com/kronosapiens/talmud-server/issues"
   },
-  "homepage": "https://github.com/kronosapiens/talmud#readme",
+  "homepage": "https://github.com/kronosapiens/talmud-server#readme",
   "dependencies": {
-    "bcrypt": "^1.0.3",
-    "d3": "^4.12.2",
     "express": "^4.16.2",
     "helmet": "^3.9.0",
     "knex": "^0.14.2",
     "linear-algebra": "^3.1.4",
-    "pg": "^7.4.0",
-    "vue": "^2.5.13"
+    "pg": "^7.4.0"
   }
 }
