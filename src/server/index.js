@@ -9,6 +9,11 @@ app.use(helmet())
 app.use(express.static('src/viz'))
 app.use(express.static('static'))
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*")
+  next()
+})
+
 // Define endpoints
 app.get('/', (req, res) => res.send('Hello World!'))
 
