@@ -11,3 +11,7 @@ Computational Governance
 ## Development notes
 
 To work on the D3 or Vega visualizations with local data, run `npm start` and navigate to `{d3, vega}.html`
+
+To make a new migration: `knex migrate:make migration_name`
+
+To access db in REPL: `const db = require('./src/db')`

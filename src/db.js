@@ -1,4 +1,7 @@
 const knex = require('knex')
+const bcrypt = require('bcrypt')
+
+const secrets = require('../secrets')
 
 const db = knex({
   client: 'pg',
@@ -8,6 +11,8 @@ const db = knex({
 function errorLogger(error) {
   console.error(error)
 }
+
+// Identities and Preferences
 
 function saveIdentityP(name) {
   return db('identities')
@@ -42,23 +47,39 @@ function getPreferencesP() {
     .catch(errorLogger)
 }
 
-function seedIdentities() {
-  saveIdentityP('Human')
-  saveIdentityP('Man')
-  saveIdentityP('Woman')
-  saveIdentityP('Progressive')
-  saveIdentityP('Conservative')
-  saveIdentityP('Lover')
-  saveIdentityP('Fighter')
-  saveIdentityP('Jew')
-  saveIdentityP('Christian')
-  saveIdentityP('Buddhist')
-  saveIdentityP('Muslim')
-  saveIdentityP('Hindu')
+// Users and Registration Codes
+function saveUserP(user) {
+  console.log(user)
+  console.log(secrets.saltRounds)
+  user.password = bcrypt.hashSync(user.password, secrets.saltRounds)
+  return db('users')
+    .insert(user)
+    .returning('id')
+    .catch(errorLogger)
+}
+
+function getUserByIdP(id) {
+  return db
+    .select('*')
+    .from('users')
+    .where({ id: id })
+    .first()
+}
+
+function getUserByEmailP(email) {
+  return db
+    .select('*')
+    .from('users')
+    .where({ email: email })
+    .first()
 }
 
 exports.saveIdentityP = saveIdentityP
 exports.getIdentitiesP = getIdentitiesP
+
 exports.savePreferenceP = savePreferenceP
 exports.getPreferencesP = getPreferencesP
-exports.seedIdentities = seedIdentities
+
+exports.saveUserP = saveUserP
+exports.getUserByIdP = getUserByIdP
+exports.getUserByEmailP = getUserByEmailP
