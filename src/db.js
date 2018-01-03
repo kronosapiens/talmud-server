@@ -31,18 +31,23 @@ function getIdentitiesP() {
     .catch(errorLogger)
 }
 
-function savePreferenceP(winner_id, loser_id) {
-  const [a_id, b_id] = [winner_id, loser_id].sort()
-  const winner = (a_id == winner_id) ? 0 : 1
+function savePreferenceP(user_id, winner_id, loser_id) {
+  const [alpha_id, beta_id] = [winner_id, loser_id].sort()
+  const win_bit = (alpha_id == winner_id) ? 0 : 1
   return db('preferences')
-    .insert({'a_id': a_id, 'b_id': b_id, 'winner': winner})
+    .insert({
+      user_id: user_id,
+      alpha_id: alpha_id,
+      beta_id: beta_id,
+      win_bit: win_bit
+    })
     .returning('id')
     .catch(errorLogger)
 }
 
 function getPreferencesP() {
   return db
-    .select('a_id', 'b_id', 'winner')
+    .select('user_id', 'alpha_id', 'beta_id', 'win_bit')
     .from('preferences')
     .catch(errorLogger)
 }
@@ -50,7 +55,6 @@ function getPreferencesP() {
 // Users and Registration Codes
 function saveUserP(user) {
   console.log(user)
-  console.log(secrets.saltRounds)
   user.password = bcrypt.hashSync(user.password, secrets.saltRounds)
   return db('users')
     .insert(user)
@@ -64,6 +68,7 @@ function getUserByIdP(id) {
     .from('users')
     .where({ id: id })
     .first()
+    .catch(errorLogger)
 }
 
 function getUserByEmailP(email) {
@@ -72,6 +77,7 @@ function getUserByEmailP(email) {
     .from('users')
     .where({ email: email })
     .first()
+    .catch(errorLogger)
 }
 
 exports.saveIdentityP = saveIdentityP

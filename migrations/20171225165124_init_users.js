@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
         t.string('email').unique().notNull();
         t.string('password').notNull();
         t.string('cc').notNull();
-        t.integer('zip');
+        t.string('zip');
         t.timestamps(useTimestamps = true, defaultToNow = true);
     });
 };
