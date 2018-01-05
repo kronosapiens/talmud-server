@@ -47,8 +47,9 @@ function savePreferenceP(user_id, winner_id, loser_id) {
 
 function getPreferencesP() {
   return db
-    .select('user_id', 'alpha_id', 'beta_id', 'win_bit')
+    .select('user_id', 'alpha_id', 'beta_id', 'win_bit', 'cc', 'zip')
     .from('preferences')
+    .join('users', 'preferences.user_id', 'users.id')
     .catch(errorLogger)
 }
 

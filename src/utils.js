@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const jsonwebtoken = require('jsonwebtoken')
 
 const secrets = require('../secrets')
 
@@ -9,7 +9,7 @@ function verifyPass(password, hash) {
 }
 
 function signJwt(email, id) {
-  return jwt.sign({ id: id, email: email }, secrets.jwtSecret)
+  return jsonwebtoken.sign({ id: id, email: email }, secrets.jwtSecret)
 }
 
 exports.verifyPass = verifyPass
