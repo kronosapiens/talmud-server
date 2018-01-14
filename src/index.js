@@ -41,7 +41,7 @@ const authJwt = passport.authenticate('jwt', { session: false })
 // Define endpoints
 app.get('/', (req, res) => {
   console.log('GET /')
-  res.send(JSON.stringify({ text: 'Hello World!' }))
+  res.send(JSON.stringify({ text: 'Hello Talmud!' }))
 })
 
 app.get('/identities', (req, res) => {

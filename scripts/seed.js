@@ -1,33 +1,35 @@
 const db = require('../src/db')
 
-db.saveIdentityP('Human')
-db.saveIdentityP('Animal')
+async function seedIdentities () {
+  await db.saveIdentityP('Human')
+  await db.saveIdentityP('Animal')
 
-db.saveIdentityP('Man')
-db.saveIdentityP('Woman')
+  await db.saveIdentityP('Gender') // Pivot on gender
 
-db.saveIdentityP('Father')
-db.saveIdentityP('Brother')
-db.saveIdentityP('Son')
+  await db.saveIdentityP('Parent') // Pivot on gender
+  await db.saveIdentityP('Sibling') // Pivot on gender
+  await db.saveIdentityP('Child') // Pivot on gender
 
-db.saveIdentityP('Mother')
-db.saveIdentityP('Sister')
-db.saveIdentityP('Daughter')
+  await db.saveIdentityP('Progressive')
+  await db.saveIdentityP('Conservative')
 
-db.saveIdentityP('Progressive')
-db.saveIdentityP('Conservative')
+  await db.saveIdentityP('Patriot')
+  await db.saveIdentityP('Radical')
 
-db.saveIdentityP('Patriot')
-db.saveIdentityP('Radical')
+  await db.saveIdentityP('Friend') // Pivot on profession
 
-db.saveIdentityP('Friend')
-db.saveIdentityP('Colleague')
+  await db.saveIdentityP('Friend')
+  await db.saveIdentityP('Colleague')
 
-db.saveIdentityP('Jew')
-db.saveIdentityP('Christian')
-db.saveIdentityP('Buddhist')
-db.saveIdentityP('Muslim')
-db.saveIdentityP('Hindu')
-db.saveIdentityP('Seeker')
+  await db.saveIdentityP('Religion') // Pivot on religion
 
-db.saveIdentityP('Artist')
+  await db.saveIdentityP('Ethnicity') // Pivot on ethnicity
+
+  await db.saveIdentityP('Spiritual')
+  await db.saveIdentityP('Athiest')
+
+  await db.saveIdentityP('Materialist')
+  await db.saveIdentityP('Idealist')
+}
+
+seedIdentities()
