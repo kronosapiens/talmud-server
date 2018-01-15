@@ -94,4 +94,5 @@ app.post('/register', (req, res) => {
 })
 
 // Run
-app.listen(3000, () => console.log('Talmud listening on port 3000!'))
+const port = process.env.PORT
+app.listen(port, () => console.log('Talmud listening on port ' + port))
