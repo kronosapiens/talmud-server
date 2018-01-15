@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express')
 const helmet = require('helmet')
 const bodyParser = require('body-parser')
@@ -6,7 +8,6 @@ const passportJwt = require('passport-jwt')
 
 const db = require('./db')
 const utils = require('./utils')
-const secrets = require('../secrets')
 
 // Instantiate application
 const app = express()
@@ -25,7 +26,7 @@ app.use(function(req, res, next) {
 // Passport setup
 const passportOptions = {
   jwtFromRequest: passportJwt.ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: secrets.jwtSecret
+  secretOrKey: process.env.JWT_SECRET
 }
 
 passport.use(new passportJwt.Strategy(passportOptions, (data, cb) => {

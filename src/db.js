@@ -1,8 +1,6 @@
 const knex = require('knex')
 const bcrypt = require('bcrypt')
 
-const secrets = require('../secrets')
-
 const db = knex({
   client: 'pg',
   connection: 'postgresql://krono@localhost:5432/krono'
@@ -56,7 +54,7 @@ function getPreferencesP() {
 // Users and Registration Codes
 function saveUserP(user) {
   console.log(user)
-  user.password = bcrypt.hashSync(user.password, secrets.saltRounds)
+  user.password = bcrypt.hashSync(user.password, process.env.SALT_ROUNDS)
   return db('users')
     .insert(user)
     .returning('id')
