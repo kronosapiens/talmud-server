@@ -3,31 +3,14 @@ const bcrypt = require('bcrypt')
 
 const db = knex({
   client: 'pg',
-  connection: 'postgresql://krono@localhost:5432/krono'
+  connection: 'postgresql://' + process.env.POSTGRES_URI
 })
 
 function errorLogger(error) {
   console.error(error)
 }
 
-// Identities and Preferences
-
-function saveIdentityP(name) {
-  return db('identities')
-    .insert({'name': name})
-    .returning('id')
-    .catch(errorLogger)
-    .then(function(id) {
-      console.log('Identity id:', id)
-    })
-}
-
-function getIdentitiesP() {
-  return db
-    .select('*')
-    .from('identities')
-    .catch(errorLogger)
-}
+// Preferences
 
 function savePreferenceP(user_id, winner_id, loser_id) {
   const [alpha_id, beta_id] = [winner_id, loser_id].sort()
@@ -79,9 +62,6 @@ function getUserByEmailP(email) {
     .first()
     .catch(errorLogger)
 }
-
-exports.saveIdentityP = saveIdentityP
-exports.getIdentitiesP = getIdentitiesP
 
 exports.savePreferenceP = savePreferenceP
 exports.getPreferencesP = getPreferencesP

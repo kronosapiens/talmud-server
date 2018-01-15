@@ -45,12 +45,6 @@ app.get('/', (req, res) => {
   res.send(JSON.stringify({ text: 'Hello Talmud!' }))
 })
 
-app.get('/identities', (req, res) => {
-  console.log('GET /identities')
-  db.getIdentitiesP()
-  .then(rows => res.send(rows))
-})
-
 app.get('/preferences', (req, res) => {
   console.log('GET /preferences')
   db.getPreferencesP()
