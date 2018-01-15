@@ -3,7 +3,13 @@ const bcrypt = require('bcrypt')
 
 const db = knex({
   client: 'pg',
-  connection: 'postgresql://' + process.env.POSTGRES_URI
+  connection: {
+    host : process.env.RDS_HOSTNAME,
+    port : process.env.RDS_PORT,
+    user : process.env.RDS_USERNAME,
+    password : process.env.RDS_PASSWORD,
+    database : process.env.RDS_DB_NAME,
+  }
 })
 
 function errorLogger(error) {

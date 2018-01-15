@@ -6,7 +6,6 @@ yarn-debug.log*
 yarn-error.log*
 
 .DS_Store
-.env
 
 # Runtime data
 pids
@@ -65,3 +64,4 @@ typings/
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+.ebextensions/*
