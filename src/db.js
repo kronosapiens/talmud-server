@@ -54,7 +54,8 @@ function getPreferencesP() {
 // Users and Registration Codes
 function saveUserP(user) {
   console.log(user)
-  user.password = bcrypt.hashSync(user.password, process.env.SALT_ROUNDS)
+  let saltRounds = parseInt(process.env.SALT_ROUNDS)
+  user.password = bcrypt.hashSync(user.password, saltRounds)
   return db('users')
     .insert(user)
     .returning('id')
