@@ -68,7 +68,7 @@ app.post('/login', (req, res) => {
       var data = {}
       if (!user) data = { text: 'User not found' }
       else if (!utils.verifyPass(password, user.password)) data = { text: 'Incorrect password' }
-      else data = { jwt: utils.signJwt(email, user.id) }
+      else data = { jwt: utils.signJwt(user) }
       res.send(JSON.stringify(data))
     })
 })
@@ -80,6 +80,12 @@ app.post('/register', (req, res) => {
     password: req.body.password,
     cc: req.body.cc,
     zip: req.body.zip,
+    gender: req.body.gender,
+    religion: req.body.religion,
+    ethnicity: req.body.ethnicity,
+    job: req.body.job,
+    age: db.parseIntDB(req.body.age),
+    income: db.parseIntDB(req.body.income),
   }
   db.saveUserP(user)
     .then(id => {

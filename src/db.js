@@ -1,19 +1,15 @@
 const knex = require('knex')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
-const db = knex({
-  client: 'pg',
-  connection: {
-    host : process.env.RDS_HOSTNAME,
-    port : process.env.RDS_PORT,
-    user : process.env.RDS_USERNAME,
-    password : process.env.RDS_PASSWORD,
-    database : process.env.RDS_DB_NAME,
-  }
-})
+const knexfile = require('../knexfile')
+const db = knex(knexfile.development)
 
 function errorLogger(error) {
   console.error(error)
+}
+
+function parseIntDB(intStr) {
+  return intStr ? parseInt(intStr) : null
 }
 
 // Preferences
@@ -68,6 +64,8 @@ function getUserByEmailP(email) {
     .first()
     .catch(errorLogger)
 }
+
+exports.parseIntDB = parseIntDB
 
 exports.savePreferenceP = savePreferenceP
 exports.getPreferencesP = getPreferencesP

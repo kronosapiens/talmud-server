@@ -6,6 +6,12 @@ exports.up = function(knex, Promise) {
         t.string('password').notNull();
         t.string('cc').notNull();
         t.string('zip');
+        t.string('gender');
+        t.string('religion');
+        t.string('ethnicity');
+        t.string('job');
+        t.integer('age');
+        t.integer('income');
         t.timestamps(useTimestamps = true, defaultToNow = true);
     });
 };
