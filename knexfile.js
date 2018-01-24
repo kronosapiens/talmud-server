@@ -1,8 +1,22 @@
-require('dotenv').config()
-
 module.exports = {
 
   development: {
+    client: 'pg',
+    connection: 'postgresql://krono@localhost:5432/talmud_dev',
+    migrations: {
+      tableName: 'knex_migrations'
+    }
+  },
+
+  test: {
+    client: 'pg',
+    connection: 'postgresql://krono@localhost:5432/talmud_test',
+    migrations: {
+      tableName: 'knex_migrations'
+    }
+  },
+
+  production: {
     client: 'pg',
     connection: {
       host : process.env.RDS_HOSTNAME,
@@ -15,5 +29,4 @@ module.exports = {
       tableName: 'knex_migrations'
     }
   }
-
 }

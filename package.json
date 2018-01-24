@@ -4,7 +4,7 @@
   "description": "Computational Governance",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --exit",
     "start": "node src/index.js",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback"
@@ -35,6 +35,7 @@
     "helmet": "^3.9.0",
     "jsonwebtoken": "^8.1.0",
     "knex": "^0.14.2",
+    "nodemailer": "^4.4.2",
     "passport": "^0.4.0",
     "passport-jwt": "^3.0.1",
     "pg": "^7.4.0",

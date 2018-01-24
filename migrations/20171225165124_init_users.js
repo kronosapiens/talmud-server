@@ -2,6 +2,8 @@
 exports.up = function(knex, Promise) {
     return knex.schema.createTable('users', function(t) {
         t.increments('id').unsigned().primary();
+        t.timestamps(useTimestamps = true, defaultToNow = true);
+        t.boolean('confirmed').notNull().defaultTo(false);
         t.string('email').unique().notNull();
         t.string('password').notNull();
         t.string('cc').notNull();
@@ -12,7 +14,6 @@ exports.up = function(knex, Promise) {
         t.string('job');
         t.integer('age');
         t.integer('income');
-        t.timestamps(useTimestamps = true, defaultToNow = true);
     });
 };
 

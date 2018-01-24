@@ -1,8 +1,9 @@
+require('dotenv').config()
+
 const bcrypt = require('bcryptjs')
 const jsonwebtoken = require('jsonwebtoken')
 
 function verifyPass(password, hash) {
-  console.log([password, hash])
   return bcrypt.compareSync(password, hash)
 }
 

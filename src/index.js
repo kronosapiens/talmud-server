@@ -7,6 +7,7 @@ const passport = require('passport')
 const passportJwt = require('passport-jwt')
 
 const db = require('./db')
+const mailer = require('./mailer')
 const utils = require('./utils')
 
 // Instantiate application
@@ -68,6 +69,7 @@ app.post('/login', (req, res) => {
       var data = {}
       if (!user) data = { text: 'User not found' }
       else if (!utils.verifyPass(password, user.password)) data = { text: 'Incorrect password' }
+      else if (!user.confirmed) data = { text: 'Email not confirmed' }
       else data = { jwt: utils.signJwt(user) }
       res.send(JSON.stringify(data))
     })
@@ -87,9 +89,19 @@ app.post('/register', (req, res) => {
     age: db.parseIntDB(req.body.age),
     income: db.parseIntDB(req.body.income),
   }
-  db.saveUserP(user)
-    .then(id => {
-      res.send(JSON.stringify({ userId: id }))
+  db.registerUserP(req.body.regCode, user)
+    .then(registration => {
+      mailer.sendEmailConfirmP(user.email, registration.confirm_code)
+      res.send(JSON.stringify({ userId: registration.user_id }))
+    })
+})
+
+app.post('/confirm', (req, res) => {
+  console.log('POST /confirm')
+  db.confirmUserFromCodeP(req.body.confCode)
+    .then(user => {
+      let data = { jwt: utils.signJwt(user) }
+      res.send(JSON.stringify(data))
     })
 })
 
