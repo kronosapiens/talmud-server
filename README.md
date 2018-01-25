@@ -15,3 +15,5 @@ To work on the D3 or Vega visualizations with local data, run `npm start` and na
 To make a new migration: `knex migrate:make migration_name`
 
 To access db in REPL: `const db = require('./src/db')`
+
+Set env variables: `eval "$(sudo /opt/elasticbeanstalk/bin/get-config environment | ./json2env.sh)"`
