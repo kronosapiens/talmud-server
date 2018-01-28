@@ -69,7 +69,6 @@ app.post('/login', (req, res) => {
       var data = {}
       if (!user) data = { text: 'User not found' }
       else if (!utils.verifyPass(password, user.password)) data = { text: 'Incorrect password' }
-      else if (!user.confirmed) data = { text: 'Email not confirmed' }
       else data = { jwt: utils.signJwt(user) }
       res.send(JSON.stringify(data))
     })
@@ -89,16 +88,7 @@ app.post('/register', (req, res) => {
     age: db.parseIntDB(req.body.age),
     income: db.parseIntDB(req.body.income),
   }
-  db.registerUserP(req.body.regCode, user)
-    .then(registration => {
-      mailer.sendEmailConfirmP(user.email, registration.confirm_code)
-      res.send(JSON.stringify({ userId: registration.user_id }))
-    })
-})
-
-app.post('/confirm', (req, res) => {
-  console.log('POST /confirm')
-  db.confirmUserFromCodeP(req.body.confCode)
+  db.saveUserP(user)
     .then(user => {
       let data = { jwt: utils.signJwt(user) }
       res.send(JSON.stringify(data))

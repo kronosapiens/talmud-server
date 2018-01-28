@@ -46,7 +46,7 @@ function saveUserP(user) {
   user.password = bcrypt.hashSync(user.password, saltRounds)
   return db('users')
     .insert(user)
-    .returning('id')
+    .returning('*')
     .then(res => res[0])
     .catch(errorLogger)
 }
@@ -120,8 +120,8 @@ function registerUserP(regCode, userObj) {
   return validateRegisterCodeP(regCode)
     .then(regId =>
       saveUserP(userObj)
-        .then(userId =>
-          linkRegistrationToUserP(regId, userId)
+        .then(user =>
+          linkRegistrationToUserP(regId, user.id)
         )
     )
 }

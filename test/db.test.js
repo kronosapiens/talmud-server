@@ -30,8 +30,8 @@ describe('db.js', function() {
 
   describe('saveUserP()', function() {
     it('should create a user', async function() {
-      let id = await db.saveUserP(fakeUser)
-      assert.equal(id, 1)
+      let user = await db.saveUserP(fakeUser)
+      assert.equal(user.id, 1)
     })
   })
 
