@@ -95,6 +95,26 @@ app.post('/register', (req, res) => {
     })
 })
 
+app.post('/update', authJwt, (req, res) => {
+  console.log('POST /update')
+  let updatedUser = {
+    cc: req.body.cc,
+    zip: req.body.zip,
+    gender: req.body.gender,
+    religion: req.body.religion,
+    ethnicity: req.body.ethnicity,
+    job: req.body.job,
+    age: db.parseIntDB(req.body.age),
+    income: db.parseIntDB(req.body.income),
+  }
+  db.updateUserP(req.user.id, updatedUser)
+    .then(user => {
+      let data = { jwt: utils.signJwt(user) }
+      res.send(JSON.stringify(data))
+    })
+})
+
+
 // Run
 const port = process.env.PORT
 app.listen(port, () => console.log('Talmud listening on port ' + port))

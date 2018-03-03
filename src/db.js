@@ -51,6 +51,15 @@ function saveUserP(user) {
     .catch(errorLogger)
 }
 
+function updateUserP(id, user) {
+  return db('users')
+    .where({ id: id })
+    .update(user)
+    .returning('*')
+    .then(res => res[0])
+    .catch(errorLogger)
+}
+
 function getUserByIdP(id) {
   return db('users')
     .select('*')
@@ -140,6 +149,7 @@ exports.savePreferenceP = savePreferenceP
 exports.getPreferencesP = getPreferencesP
 
 exports.saveUserP = saveUserP
+exports.updateUserP = updateUserP
 exports.getUserByIdP = getUserByIdP
 exports.getUserByEmailP = getUserByEmailP
 

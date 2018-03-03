@@ -13,6 +13,10 @@ function signJwt(user) {
     id: user.id,
     email: user.email,
 
+    // Region
+    cc: user.cc,
+    zip: user.zip,
+
     // Pivots
     gender: user.gender,
     religion: user.religion,
