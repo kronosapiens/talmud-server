@@ -2,7 +2,7 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgresql://krono@localhost:5432/talmud_dev',
+    connection: 'postgresql://kronosapiens@localhost:5432/talmud_dev',
     migrations: {
       tableName: 'knex_migrations'
     }
@@ -10,7 +10,7 @@ module.exports = {
 
   test: {
     client: 'pg',
-    connection: 'postgresql://krono@localhost:5432/talmud_test',
+    connection: 'postgresql://kronosapiens@localhost:5432/talmud_test',
     migrations: {
       tableName: 'knex_migrations'
     }
