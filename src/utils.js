@@ -19,6 +19,9 @@ function signJwt(user) {
 
     // Pivots
     gender: user.gender,
+    relationship: user.relationship,
+    siblings: user.siblings,
+    children: user.children,
     religion: user.religion,
     ethnicity: user.ethnicity,
     job: user.job,
