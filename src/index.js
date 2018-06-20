@@ -80,7 +80,7 @@ app.post('/register', (req, res) => {
     email: req.body.email,
     password: req.body.password,
     cc: req.body.cc,
-    zip: req.body.zip,
+    zip: req.body.cc === "US" ? req.body.zip : "",
     gender: req.body.gender,
     relationship: req.body.relationship,
     siblings: req.body.siblings,
@@ -102,7 +102,7 @@ app.post('/update', authJwt, (req, res) => {
   console.log('POST /update')
   let updatedUser = {
     cc: req.body.cc,
-    zip: req.body.zip,
+    zip: req.body.cc === "US" ? req.body.zip : "",
     gender: req.body.gender,
     relationship: req.body.relationship,
     siblings: req.body.siblings,
