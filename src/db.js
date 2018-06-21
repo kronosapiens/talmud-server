@@ -18,18 +18,35 @@ function parseIntDB(intStr) {
 
 // Preferences
 
-function savePreferenceP(user_id, winner_id, loser_id) {
-  const [alpha_id, beta_id] = [winner_id, loser_id].sort()
-  const win_bit = (alpha_id == winner_id) ? 0 : 1
+function _savePreferenceP(user_id, alpha_id, beta_id, win_bit) {
   return db('preferences')
     .insert({
       user_id: user_id,
       alpha_id: alpha_id,
       beta_id: beta_id,
-      win_bit: win_bit
+      win_bit: win_bit,
     })
     .returning('id')
+}
+
+function updatePreferenceP(user_id, alpha_id, beta_id, win_bit) {
+  return db('preferences')
+    .where({
+      user_id: user_id,
+      alpha_id: alpha_id,
+      beta_id: beta_id,
+    })
+    .update({ win_bit: win_bit })
+    .returning('id')
+    .then(res => res[0])
     .catch(errorLogger)
+}
+
+function saveOrUpdatePreferenceP(user_id, winner_id, loser_id) {
+  const [alpha_id, beta_id] = [winner_id, loser_id].sort()
+  const win_bit = (alpha_id == winner_id) ? 0 : 1
+  return _savePreferenceP(user_id, alpha_id, beta_id, win_bit)
+    .catch(error => updatePreferenceP(user_id, alpha_id, beta_id, win_bit))
 }
 
 function getPreferencesP() {
@@ -145,7 +162,7 @@ function confirmUserFromCodeP(confCode) {
 exports.migrate = db.migrate
 exports.parseIntDB = parseIntDB
 
-exports.savePreferenceP = savePreferenceP
+exports.saveOrUpdatePreferenceP = saveOrUpdatePreferenceP
 exports.getPreferencesP = getPreferencesP
 
 exports.saveUserP = saveUserP

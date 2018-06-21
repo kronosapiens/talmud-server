@@ -63,4 +63,19 @@ describe('db.js', function() {
     })
   })
 
+  describe('saveOrUpdatePreferenceP()', function() {
+    it('should save a new preference', async function() {
+      let user = await db.saveUserP(fakeUser)
+      let preferenceId = await db.saveOrUpdatePreferenceP(user.id, 1, 2)
+      assert.equal(preferenceId, 1)
+    })
+
+    it('should update an existing preference', async function() {
+      let user = await db.saveUserP(fakeUser)
+      let preferenceId = await db.saveOrUpdatePreferenceP(user.id, 1, 2)
+      let preferenceId2 = await db.saveOrUpdatePreferenceP(user.id, 2, 1)
+      assert.equal(preferenceId, preferenceId2)
+    })
+  })
+
 })

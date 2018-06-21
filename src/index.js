@@ -54,7 +54,7 @@ app.get('/preferences', (req, res) => {
 
 app.post('/preferences', authJwt, (req, res) => {
   console.log('POST /preferences')
-  db.savePreferenceP(req.user.id, req.body.winner, req.body.loser)
+  db.saveOrUpdatePreferenceP(req.user.id, req.body.winner, req.body.loser)
     .then(id => {
       res.send(JSON.stringify({ preferenceId: id }))
     })
