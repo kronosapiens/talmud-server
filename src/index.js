@@ -88,6 +88,7 @@ app.post('/register', (req, res) => {
     religion: req.body.religion,
     ethnicity: req.body.ethnicity,
     job: req.body.job,
+    party: req.body.party,
     age: db.parseIntDB(req.body.age),
     income: db.parseIntDB(req.body.income),
   }
@@ -110,6 +111,7 @@ app.post('/update', authJwt, (req, res) => {
     religion: req.body.religion,
     ethnicity: req.body.ethnicity,
     job: req.body.job,
+    party: req.body.party,
     age: db.parseIntDB(req.body.age),
     income: db.parseIntDB(req.body.income),
   }

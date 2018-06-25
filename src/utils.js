@@ -25,6 +25,7 @@ function signJwt(user) {
     religion: user.religion,
     ethnicity: user.ethnicity,
     job: user.job,
+    party: user.party,
   }, process.env.JWT_SECRET)
 }
 
