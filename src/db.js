@@ -10,6 +10,7 @@ const db = knex(config)
 
 function errorLogger(error) {
   console.error(error)
+  throw error
 }
 
 function parseIntDB(intStr) {

@@ -50,14 +50,15 @@ app.get('/preferences', (req, res) => {
   console.log('GET /preferences')
   db.getPreferencesP()
     .then(rows => res.send(rows) )
+    .catch(error => res.send(JSON.stringify({ text: error.detail })))
 })
 
 app.post('/preferences', authJwt, (req, res) => {
   console.log('POST /preferences')
   db.saveOrUpdatePreferenceP(req.user.id, req.body.winner, req.body.loser)
-    .then(id => {
-      res.send(JSON.stringify({ preferenceId: id }))
-    })
+    .then(id => res.send(JSON.stringify({ preferenceId: id })))
+    .catch(error => res.send(JSON.stringify({ text: error.detail })))
+
 })
 
 app.post('/login', (req, res) => {
@@ -72,6 +73,7 @@ app.post('/login', (req, res) => {
       else data = { jwt: utils.signJwt(user) }
       res.send(JSON.stringify(data))
     })
+    .catch(error => res.send(JSON.stringify({ text: error.detail })))
 })
 
 app.post('/register', (req, res) => {
@@ -93,10 +95,9 @@ app.post('/register', (req, res) => {
     income: db.parseIntDB(req.body.income),
   }
   db.saveUserP(user)
-    .then(user => {
-      let data = { jwt: utils.signJwt(user) }
-      res.send(JSON.stringify(data))
-    })
+    .then(user => res.send(JSON.stringify({ jwt: utils.signJwt(user) })))
+    .catch(error => res.send(JSON.stringify({ text: error.detail })))
+
 })
 
 app.post('/update', authJwt, (req, res) => {
@@ -116,10 +117,9 @@ app.post('/update', authJwt, (req, res) => {
     income: db.parseIntDB(req.body.income),
   }
   db.updateUserP(req.user.id, updatedUser)
-    .then(user => {
-      let data = { jwt: utils.signJwt(user) }
-      res.send(JSON.stringify(data))
-    })
+    .then(user => res.send(JSON.stringify({ jwt: utils.signJwt(user) })))
+    .catch(error => res.send(JSON.stringify({ text: error.detail })))
+
 })
 
 
