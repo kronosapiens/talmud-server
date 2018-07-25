@@ -58,7 +58,6 @@ app.post('/preferences', authJwt, (req, res) => {
   db.saveOrUpdatePreferenceP(req.user.id, req.body.winner, req.body.loser)
     .then(id => res.send(JSON.stringify({ preferenceId: id })))
     .catch(error => res.send(JSON.stringify({ text: error.detail })))
-
 })
 
 app.post('/login', (req, res) => {
@@ -91,13 +90,10 @@ app.post('/register', (req, res) => {
     ethnicity: req.body.ethnicity,
     job: req.body.job,
     party: req.body.party,
-    age: db.parseIntDB(req.body.age),
-    income: db.parseIntDB(req.body.income),
   }
   db.saveUserP(user)
     .then(user => res.send(JSON.stringify({ jwt: utils.signJwt(user) })))
     .catch(error => res.send(JSON.stringify({ text: error.detail })))
-
 })
 
 app.post('/update', authJwt, (req, res) => {
@@ -113,15 +109,11 @@ app.post('/update', authJwt, (req, res) => {
     ethnicity: req.body.ethnicity,
     job: req.body.job,
     party: req.body.party,
-    age: db.parseIntDB(req.body.age),
-    income: db.parseIntDB(req.body.income),
   }
   db.updateUserP(req.user.id, updatedUser)
     .then(user => res.send(JSON.stringify({ jwt: utils.signJwt(user) })))
     .catch(error => res.send(JSON.stringify({ text: error.detail })))
-
 })
-
 
 // Run
 const port = process.env.PORT

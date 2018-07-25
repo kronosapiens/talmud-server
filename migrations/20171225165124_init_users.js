@@ -12,8 +12,10 @@ exports.up = function(knex, Promise) {
         t.string('religion');
         t.string('ethnicity');
         t.string('job');
-        t.integer('age');
-        t.integer('income');
+        t.string('relationship');
+        t.string('siblings');
+        t.string('children');
+        t.string('party');
     });
 };
 
