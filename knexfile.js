@@ -2,7 +2,7 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgresql://kronosapiens@localhost:5432/talmud_dev',
+    connection: `postgresql://kronosapiens@localhost:5432/talmud_dev`,
     migrations: {
       tableName: 'knex_migrations'
     }
@@ -10,7 +10,7 @@ module.exports = {
 
   test: {
     client: 'pg',
-    connection: 'postgresql://kronosapiens@localhost:5432/talmud_test',
+    connection: `postgresql://kronosapiens@localhost:5432/talmud_test`,
     migrations: {
       tableName: 'knex_migrations'
     }
@@ -18,13 +18,7 @@ module.exports = {
 
   production: {
     client: 'pg',
-    connection: {
-      host : process.env.RDS_HOSTNAME,
-      port : process.env.RDS_PORT,
-      user : process.env.RDS_USERNAME,
-      password : process.env.RDS_PASSWORD,
-      database : process.env.RDS_DB_NAME,
-    },
+    connection: `postgresql://kronosapiens@localhost:5432/talmud_prod`,
     migrations: {
       tableName: 'knex_migrations'
     }

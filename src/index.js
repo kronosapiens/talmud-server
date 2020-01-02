@@ -1,5 +1,8 @@
 require('dotenv').config()
 
+const fs = require('fs')
+const https = require('https')
+
 const express = require('express')
 const helmet = require('helmet')
 const bodyParser = require('body-parser')
@@ -116,5 +119,12 @@ app.post('/update', authJwt, (req, res) => {
 })
 
 // Run
-const port = process.env.PORT
-app.listen(port, () => console.log('Talmud listening on port ' + port))
+const msg = `Running on port ${process.env.PORT} as ${process.env.USER}`
+
+if (process.env.USE_SSL) {
+  console.log("Running with SSL")
+  sslConfig = { key: fs.readFileSync(process.env.SSL_KEY), cert: fs.readFileSync(process.env.SSL_CERT) }
+  https.createServer(sslConfig, app).listen(process.env.PORT, () => console.log(msg))
+} else {
+  app.listen(process.env.PORT, () => console.log(msg))
+}
